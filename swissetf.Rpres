@@ -1,0 +1,57 @@
+Swiss ETF Tool
+========================================================
+author: Manuel Walser
+date: August 2015
+font-family: 'Verdana'
+
+```{r, echo=FALSE, results=FALSE}
+library(Quandl)
+normalize <- function(ts) {
+  ind <- min(which(complete.cases(ts) == TRUE))
+  sweep(ts, 2, ts[ind], "/") - 1
+}
+smi <- Quandl("YAHOO/INDEX_SSMI.4", type="xts", collapse = "weekly")
+```
+
+Open: https://higgser.shinyapps.io/swissetf
+
+The Idea
+========================================================
+
+- Web Application to compare Swiss ETFs
+- Application tailored to Swiss market
+- ETF = Exchange Traded Funds
+- Simple and cost-efficient for private investors
+- SMI = Swiss market index
+
+The Data Source
+========================================================
+
+- Data is loaded from [Quandl.com](http://www.quandl.com)
+- Only public free series are used
+- Data quality is problematic
+- Missing and wrong data mess up the plots
+- Most Swiss instruments are missing
+- Results from Google/Yahoo with quantmod not better
+
+Cumulative Return
+========================================================
+
+$R_t$ = aggregated profit/loss = $\frac{P_t - P_0}{P_0} 100 \%$
+
+```{r, echo=FALSE}
+plot(normalize(smi)*100, ylab = "Cumulative return [%]",
+     main = "Swiss Market iIdex", major.ticks = "years",
+     major.format = "%Y", minor.ticks = FALSE)
+```
+
+Outlook and Improvements
+========================================================
+incremental: true
+
+- Include more ETFs
+- Compare againts other indices (SMIM, SPI, SLI, ...)
+- Show selectable table with all ETFs
+- Show summary of each ETF
+- Calcuate more performance indicators (volatility, TER, ...)
+- Rate financial instruments
