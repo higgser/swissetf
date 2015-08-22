@@ -4,14 +4,7 @@ author: Manuel Walser
 date: August 2015
 font-family: 'Verdana'
 
-```{r, echo=FALSE, results=FALSE}
-library(Quandl)
-normalize <- function(ts) {
-  ind <- min(which(complete.cases(ts) == TRUE))
-  sweep(ts, 2, ts[ind], "/") - 1
-}
-smi <- Quandl("YAHOO/INDEX_SSMI.4", type="xts", collapse = "weekly")
-```
+
 
 Demo: https://higgser.shinyapps.io/swissetf
 
@@ -39,11 +32,7 @@ Cumulative Return
 
 $R_t$ = aggregated profit/loss = $\frac{P_t - P_0}{P_0} 100 \%$
 
-```{r, echo=FALSE}
-plot(normalize(smi)*100, ylab = "Cumulative return [%]",
-     main = "Swiss Market iIdex", major.ticks = "years",
-     major.format = "%Y", minor.ticks = FALSE)
-```
+![plot of chunk unnamed-chunk-2](swissetf-figure/unnamed-chunk-2-1.png) 
 
 Outlook and Improvements
 ========================================================
